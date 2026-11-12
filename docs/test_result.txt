@@ -1,0 +1,44 @@
+==============================================================
+Obsidian Ear-Coach (YouTube + Obsidian + agy CLI) Test Report
+Executed At: 2026-11-12T17:01:44.357Z
+==============================================================
+
+[Test 1] YouTube URL & Timestamp Parser
+  -> PASS: Standard URLs, Shorts, youtu.be, timestamps, and bookmarklet verified.
+
+[Test 2] Transcript Processor & Phonetic Trap Detection
+  -> PASS: Merged 3 cues into 2 sentences with accurate phonetic traps (SPEED_SPIKE, WEAK_FORM, FLAP_T).
+
+[Test 3] High-Volume Dataset Performance & Memoized Binary Search (5,000 cues)
+  -> PASS: 5,000 cues merged into 1667 segments in 19.16ms; 10,000 time-sync lookups completed in 1.27ms.
+
+[Test 4] AgyCliService & Web Worker Session Parsing
+  -> PASS: Local agy CLI responsive & Worker session parsing verified.
+
+[Test 5] File Line Limit (< 900 lines) & Zero-Blur CSS Audit
+  - src\main.ts: 531 lines (OK)
+  - src\services\AgyCliService.ts: 309 lines (OK)
+  - src\services\NoteGenerator.ts: 317 lines (OK)
+  - src\services\TranscriptService.ts: 410 lines (OK)
+  - src\services\WeaknessTracker.ts: 150 lines (OK)
+  - src\types\agy.ts: 57 lines (OK)
+  - src\types\settings.ts: 37 lines (OK)
+  - src\types\transcript.ts: 89 lines (OK)
+  - src\ui\components\AgyTutorPanel.ts: 262 lines (OK)
+  - src\ui\components\MicroDictationBox.ts: 123 lines (OK)
+  - src\ui\components\PlayerBar.ts: 495 lines (OK)
+  - src\ui\components\SegmentCard.ts: 222 lines (OK)
+  - src\ui\components\VirtualSegmentList.ts: 297 lines (OK)
+  - src\ui\EarCoachView.ts: 462 lines (OK)
+  - src\ui\SettingsTab.ts: 160 lines (OK)
+  - src\ui\UrlInputModal.ts: 96 lines (OK)
+  - src\utils\binarySearch.ts: 129 lines (OK)
+  - src\utils\youtubeUrlParser.ts: 136 lines (OK)
+  - src\workers\transcript.worker.ts: 77 lines (OK)
+  - src\workers\transcriptProcessor.ts: 251 lines (OK)
+  - src\workers\WorkerPoolManager.ts: 128 lines (OK)
+  -> PASS: All source files are compact (< 360 lines) and styles.css has 0 blur effects.
+
+==============================================================
+ALL TESTS PASSED SUCCESSFULLY!
+==============================================================

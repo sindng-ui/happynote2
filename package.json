@@ -1,0 +1,29 @@
+{
+  "name": "obsidian-ear-coach",
+  "version": "1.0.0",
+  "description": "YouTube + Obsidian + agy CLI powered interactive English listening & ear-opening coach plugin.",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+    "test": "node --experimental-strip-types tests/runTests.ts"
+  },
+  "keywords": [
+    "obsidian-plugin",
+    "youtube",
+    "english-listening",
+    "agy-cli",
+    "shadowing",
+    "dictation"
+  ],
+  "author": "HappyNote2",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "builtin-modules": "^4.0.0",
+    "esbuild": "^0.28.2",
+    "obsidian": "^1.7.2",
+    "typescript": "^5.6.3"
+  }
+}

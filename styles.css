@@ -1,0 +1,562 @@
+/* ==========================================================================
+   Obsidian Ear-Coach Stylesheet (Zero-Blur High-Performance UI)
+   Strictly avoids backdrop-filter/blur or heavy shadow animations for 60fps.
+   ========================================================================== */
+
+.ear-coach-workspace-root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--background-primary);
+  color: var(--text-normal);
+  font-family: var(--font-interface);
+}
+
+/* Side-by-Side Two-Column Layout (Left: Transcript + Bottom Tutor, Right: Video Player) */
+.ear-coach-side-by-side-container {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Left Column: Transcript List + Bottom Half Tutor Drawer */
+.ear-coach-transcript-column {
+  flex: 1;
+  min-width: 360px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border-right: 1px solid var(--background-modifier-border);
+  background-color: var(--background-primary);
+  position: relative;
+}
+
+.ear-coach-transcript-list-wrapper {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.ear-coach-segment-list {
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow: visible;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.ear-coach-virtual-spacer {
+  width: 100%;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+.ear-coach-virtual-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+/* Resizer Handle between Transcript List and Tutor Drawer */
+.ear-coach-tutor-resizer {
+  height: 6px;
+  cursor: row-resize;
+  background-color: var(--background-modifier-border);
+  transition: background-color 0.15s;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 20;
+}
+
+.ear-coach-tutor-resizer:hover,
+.ear-coach-tutor-resizer.is-dragging {
+  background-color: var(--interactive-accent);
+}
+
+.ear-coach-tutor-resizer::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+}
+
+.ear-coach-tutor-resizer.is-hidden {
+  display: none !important;
+}
+
+/* Tutor Container: User Resizable Bottom Drawer */
+.ear-coach-tutor-container {
+  overflow: hidden;
+  border-top: 1px solid var(--interactive-accent) !important;
+  background-color: var(--background-secondary) !important;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.25);
+  z-index: 10;
+}
+
+.ear-coach-tutor-container.is-hidden {
+  display: none !important;
+}
+
+.ear-coach-tutor-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  gap: 8px;
+}
+
+.ear-coach-tutor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.ear-coach-tutor-header h4 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-normal);
+}
+
+.ear-coach-tutor-target-sentence {
+  font-size: 13px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  background-color: var(--background-primary);
+  border-left: 3px solid var(--interactive-accent);
+}
+
+.ear-coach-tutor-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+}
+
+.ear-coach-tutor-stream-output {
+  flex: 1;
+  min-height: 80px;
+  white-space: pre-wrap;
+  font-size: 13.5px;
+  line-height: 1.6;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--background-modifier-border);
+  background-color: var(--background-primary);
+  overflow-y: auto;
+}
+
+/* Right Column: Video Player & Controls */
+.ear-coach-video-column {
+  flex: 0 0 48%;
+  max-width: 52%;
+  min-width: 380px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-secondary);
+  overflow-y: auto;
+  padding: 12px;
+  gap: 12px;
+}
+
+.ear-coach-player-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ear-coach-video-box {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: #000;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.ear-coach-video-box iframe,
+.ear-coach-video-box > div,
+.ear-coach-youtube-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  border: 0 !important;
+  display: block;
+}
+
+.ear-coach-video-thumbnail {
+  z-index: 2;
+  background-size: cover;
+  background-position: center;
+  background-color: #111;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.ear-coach-thumbnail-badge {
+  padding: 8px 16px;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.78);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.ear-coach-player-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.ear-coach-speed-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ear-coach-speed-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-right: 2px;
+}
+
+.ear-coach-player-status {
+  margin-left: auto;
+  font-family: var(--font-monospace);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* Responsive fallback: when width is narrow (under 860px), stack vertically */
+@media (max-width: 860px) {
+  .ear-coach-side-by-side-container {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  .ear-coach-video-column {
+    flex: none;
+    max-width: 100%;
+    min-width: 0;
+    border-bottom: 1px solid var(--background-modifier-border);
+  }
+  .ear-coach-transcript-column {
+    overflow: visible;
+    border-right: none;
+  }
+  .ear-coach-tutor-container {
+    flex: none;
+    height: auto;
+    max-height: 400px;
+  }
+}
+
+/* Toolbar */
+.ear-coach-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--background-modifier-border);
+  background-color: var(--background-primary-alt);
+}
+
+.ear-coach-toolbar-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* Buttons */
+.ear-coach-btn {
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 4px;
+  border: 1px solid var(--background-modifier-border);
+  background-color: var(--background-secondary);
+  color: var(--text-normal);
+  cursor: pointer;
+}
+
+.ear-coach-btn:hover {
+  background-color: var(--background-modifier-hover);
+}
+
+.ear-coach-btn.is-active,
+.ear-coach-btn-primary {
+  background-color: var(--interactive-accent);
+  color: var(--text-on-accent);
+  border-color: var(--interactive-accent);
+}
+
+.ear-coach-btn.is-loop-active {
+  background-color: var(--color-orange);
+  color: #fff;
+  border-color: var(--color-orange);
+}
+
+.ear-coach-btn-accent {
+  border-color: var(--interactive-accent);
+  color: var(--interactive-accent);
+  font-weight: 600;
+}
+
+/* Segment Cards (CSS containment prevents cross-card reflows) */
+.ear-coach-segment-card {
+  contain: layout style;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  padding: 10px;
+  background-color: var(--background-primary);
+}
+
+.ear-coach-segment-card.is-active-playing {
+  border-left: 4px solid var(--interactive-accent);
+  background-color: var(--background-primary-alt);
+}
+
+.ear-coach-segment-card.is-pinned {
+  border-color: var(--color-yellow);
+}
+
+.ear-coach-card-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.ear-coach-card-left-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ear-coach-time-btn {
+  font-family: var(--font-monospace);
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background-color: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  cursor: pointer;
+}
+
+.ear-coach-mini-btn {
+  font-size: 11px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.ear-coach-mini-btn.is-pinned-btn {
+  background-color: var(--color-yellow);
+  color: #000;
+  font-weight: 600;
+}
+
+.ear-coach-mini-btn.is-loop-active-btn {
+  background-color: var(--color-orange);
+  color: #fff;
+  font-weight: 600;
+  border-color: var(--color-orange);
+}
+
+/* Badges */
+.ear-coach-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.ear-coach-badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background-color: var(--background-secondary-alt);
+  color: var(--text-muted);
+}
+
+.ear-coach-badge.badge-speed-spike {
+  background-color: var(--color-red);
+  color: #fff;
+}
+
+.ear-coach-badge.badge-trap-linking,
+.ear-coach-badge.badge-trap-flap_t,
+.ear-coach-badge.badge-trap-weak_form,
+.ear-coach-badge.badge-trap-elision {
+  border: 1px solid var(--interactive-accent);
+  color: var(--text-normal);
+}
+
+/* 3-Step Unlocker Bar */
+.ear-coach-step-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.ear-coach-step-btn {
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--background-modifier-border);
+  background-color: var(--background-secondary);
+  cursor: pointer;
+}
+
+.ear-coach-step-btn.is-current-step {
+  background-color: var(--interactive-accent);
+  color: var(--text-on-accent);
+  font-weight: 600;
+}
+
+.ear-coach-tutor-trigger-btn {
+  margin-left: auto;
+  border-color: var(--interactive-accent);
+}
+
+/* Step Body States */
+.ear-coach-blind-box {
+  padding: 10px;
+  border-radius: 4px;
+  background-color: var(--background-secondary);
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.ear-coach-dictation-tokens {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px;
+  line-height: 1.8;
+  margin-bottom: 8px;
+}
+
+.ear-coach-word-token.is-stressed-skeleton {
+  font-weight: 700;
+  color: var(--text-normal);
+}
+
+.ear-coach-word-token.is-context-word {
+  color: var(--text-muted);
+}
+
+.ear-coach-blank-input {
+  font-family: var(--font-monospace);
+  font-size: 13px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--interactive-accent);
+  background-color: var(--background-primary);
+  color: var(--text-normal);
+  text-align: center;
+}
+
+.ear-coach-blank-input.is-correct {
+  border-color: var(--color-green);
+  background-color: rgba(40, 167, 69, 0.12);
+}
+
+.ear-coach-blank-input.is-wrong {
+  border-color: var(--color-red);
+}
+
+.ear-coach-heard-row {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.ear-coach-heard-input {
+  flex: 1;
+  font-size: 12px;
+}
+
+.ear-coach-sound-hint-box,
+.ear-coach-full-reveal-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: var(--background-secondary);
+}
+
+.ear-coach-full-script {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-normal);
+}
+
+.ear-coach-phonetic-kr {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--interactive-accent);
+}
+
+.ear-coach-rhythm-guide {
+  font-family: var(--font-monospace);
+  font-size: 12px;
+  padding: 4px 8px;
+  border-left: 3px solid var(--interactive-accent);
+  background-color: var(--background-primary);
+}
+
+/* Tutor Panel */
+.ear-coach-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.ear-coach-chip-btn {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.ear-coach-tutor-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.ear-coach-inline-banner,
+.ear-coach-bookmarklet-box {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid var(--background-modifier-border);
+  background-color: var(--background-secondary);
+  margin-bottom: 12px;
+}

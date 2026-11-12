@@ -1,0 +1,9 @@
+{
+  "id": "obsidian-ear-coach",
+  "name": "Ear-Coach (YouTube + agy CLI Listening Tutor)",
+  "version": "1.0.0",
+  "minAppVersion": "1.5.0",
+  "description": "Zero-friction YouTube English listening coach with A-B sentence loop, 3-step ear unlocker, micro-dictation, and real-time agy CLI sound analysis.",
+  "author": "HappyNote2",
+  "isDesktopOnly": true
+}
