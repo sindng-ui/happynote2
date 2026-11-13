@@ -25,6 +25,8 @@
 | `esbuild.config.mjs` | `src/workers/transcript.worker.ts` 인라인 번들링 및 `main.js` 고속 번들러 | `__INLINE_WORKER_CODE__` |
 | `manifest.json` | Obsidian 플러그인 매니페스트 (`obsidian-ear-coach`) | `id`, `name`, `version` |
 | `styles.css` | Zero-Blur 고성능 스타일시트 (다크/라이트 테마 변수 완벽 대응) | `.ear-coach-*` 클래스 |
+| `README.md` | 사용자 친화적인 플러그인 소개, 워크스페이스 실기 캡처, 핵심 기능 및 설치/사용 가이드 | 마크다운 안내서 |
+| `assets/screenshot.jpg` | README 상단에 노출되는 실제 워크스페이스 UI 캡처 이미지 (YouTube 임베드, 블라인드 카드, 사운드 닥터 드로어 포함) | UI 캡처 이미지 자산 |
 | `.gitignore` | 개인 Vault(`gemzzang/`), 의존성(`node_modules/`), 빌드 산출물(`main.js`), OS/IDE 임시 파일 Git 추적 제외 설정 | Git 제외 규칙 |
 
 ### 2.2 데이터 타입 레이어 (`src/types/`)

@@ -1,6 +1,6 @@
 ==============================================================
 Obsidian Ear-Coach (YouTube + Obsidian + agy CLI) Test Report
-Executed At: 2026-11-12T17:01:44.357Z
+Executed At: 2026-11-13T12:38:43.981Z
 ==============================================================
 
 [Test 1] YouTube URL & Timestamp Parser
@@ -10,7 +10,7 @@ Executed At: 2026-11-12T17:01:44.357Z
   -> PASS: Merged 3 cues into 2 sentences with accurate phonetic traps (SPEED_SPIKE, WEAK_FORM, FLAP_T).
 
 [Test 3] High-Volume Dataset Performance & Memoized Binary Search (5,000 cues)
-  -> PASS: 5,000 cues merged into 1667 segments in 19.16ms; 10,000 time-sync lookups completed in 1.27ms.
+  -> PASS: 5,000 cues merged into 1667 segments in 18.02ms; 10,000 time-sync lookups completed in 1.18ms.
 
 [Test 4] AgyCliService & Web Worker Session Parsing
   -> PASS: Local agy CLI responsive & Worker session parsing verified.
